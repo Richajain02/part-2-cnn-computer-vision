@@ -2,41 +2,39 @@
 
 ## Project Overview
 
-This project implements a Convolutional Neural Network (CNN) to classify product surface images into defect categories.
-
-The objective is to automatically identify surface conditions such as:
+This project builds a Convolutional Neural Network (CNN) model to classify surface defect images into four categories:
 
 - Normal
 - Dent
 - Scratch
 - Stain
 
-This project demonstrates how CNNs can learn visual defect patterns from images.
+The objective is to automatically identify product surface defects using deep learning and computer vision.
 
 ---
 
 ## Dataset Source
 
-The dataset used in this project was provided as part of the academic assignment materials. Dataset are taken from:
-`images/normal/`
-`images/scratch/`
-`images/dent/`
-`images/stain/`
+The dataset used in this project was provided as part of the academic assignment materials. The data set are taken from:
+- `images/normal/`
+- `images/scratch/`
+- `images/dent/`
+- `images/stain/`
 
 ---
 
 ## Problem Identification
 
-This dataset represents an image classification problem.
+This dataset represents an Image Classification problem.
 
-The dataset contains images grouped into four folders:
+Each image belongs to exactly one defect category:
 
 - normal
 - dent
 - scratch
 - stain
 
-Each image belongs to exactly one class. Since no bounding boxes or segmentation masks are provided, image classification is the most appropriate computer vision task.
+Since the dataset contains class folders and no bounding boxes or segmentation masks, image classification is the most appropriate problem type.
 
 ---
 
@@ -59,17 +57,21 @@ dent: 120 images
 scratch: 120 images
 stain: 120 images
 
-Total Images: 480
+Total Images: **480**
 
-### Image Dimensions
+---
+
+## Image Dimensions
 
 All images have dimensions:
 
-96 × 96 pixels
+**96 × 96 pixels**
 
-### Dataset Balance
+---
 
-Each class contains the same number of images, so the dataset is balanced.
+## Dataset Balance
+
+Each class contains an equal number of images, so the dataset is balanced.
 
 ---
 
@@ -77,31 +79,30 @@ Each class contains the same number of images, so the dataset is balanced.
 
 The following preprocessing steps were performed:
 
-- Images resized to 96 × 96 pixels
-- Pixel normalization (0–255 scaled to 0–1)
-- Training/testing split using 80:20 ratio
-- Data augmentation:
-  - Rotation
-  - Horizontal flipping
-  - Zooming
+- Resized images to 96 × 96 pixels
+- Normalized pixel values from 0–255 to 0–1
+- Split dataset into training and testing sets
+- Applied data augmentation for better generalization
 
 Dataset split:
 
-- Training Images: 384
-- Testing Images: 96
+- Training Images: **384**
+- Testing Images: **96**
 
 ---
 
 ## CNN Model Architecture
 
-The CNN model consists of:
+The CNN model was implemented using TensorFlow and Keras in Python.
 
-1. Convolution Layer (32 filters, 3×3)
-2. ReLU Activation Function
+### Architecture:
+
+1. Convolution Layer
+2. ReLU Activation
 3. Max Pooling Layer
 4. Flatten Layer
-5. Dense Layer (128 neurons)
-6. Output Layer (4 neurons with Softmax)
+5. Dense Layer
+6. Output Layer (Softmax)
 
 ### Optimizer
 
@@ -117,30 +118,30 @@ Categorical Crossentropy
 
 ### Training Performance
 
-- Accuracy: 76.56%
-- Loss: 0.7212
+- Accuracy: **83.85%**
+- Loss: **0.4774**
 
 ### Validation Performance
 
-- Accuracy: 76.04%
-- Loss: 0.7531
+- Accuracy: **83.33%**
+- Loss: **0.4854**
 
 ### Testing Performance
 
-- Accuracy: 73.96%
-- Loss: 0.7647
+- Accuracy: **86.46%**
+- Loss: **0.4733**
 
 ---
 
 ## Observations
 
-The CNN model successfully learned defect-related visual patterns.
+The CNN model successfully learned visual defect patterns from the images.
 
-The model improved from approximately 25% accuracy (random guessing) to nearly 76% accuracy.
+The model improved significantly during training and achieved strong testing performance.
 
-Some confusion between classes was observed because dents, scratches, and stains share visually similar patterns.
+Training and validation accuracy remained close, which indicates good generalization and minimal overfitting.
 
-No significant overfitting was observed because training and validation accuracy remained close.
+Some confusion between defect classes was observed because dents, scratches, and stains can appear visually similar.
 
 ---
 
@@ -148,22 +149,21 @@ No significant overfitting was observed because training and validation accuracy
 
 ## What is convolution?
 
-Convolution uses small filters to scan an image and detect features such as edges, textures, and defect patterns.
+Convolution is the process where filters scan across an image to detect important visual patterns such as edges, textures, and defects.
 
 ## Why is pooling used?
 
-Pooling reduces image size while preserving important features. It reduces computation and helps prevent overfitting.
+Pooling reduces the size of feature maps while keeping important information. It reduces computational cost and helps prevent overfitting.
 
 ## Why is ReLU used?
 
-ReLU introduces non-linearity, allowing the CNN to learn complex image patterns efficiently.
+ReLU introduces non-linearity, allowing the network to learn complex visual patterns efficiently.
 
-## Why are CNNs better than regular neural networks for images?
+## Why are CNNs better than regular neural networks for image data?
 
-CNNs preserve spatial information and automatically learn image features, making them highly effective for image classification tasks.
+CNNs preserve spatial relationships between pixels and automatically learn image features, making them highly effective for image classification.
 
 ---
-
 # Business Use Case
 
 ## Manufacturing Industry
@@ -177,9 +177,10 @@ The model can detect:
 - Stains
 - Product defects
 
-Business benefits:
+### Business Benefits
 
 - Reduced manual inspection
 - Faster quality control
 - Lower operational costs
 - Improved product quality
+- Higher customer satisfaction
